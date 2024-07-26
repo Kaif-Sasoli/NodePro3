@@ -30,3 +30,24 @@ Controllers
 .Env 
 contains environment variables we store keys
 
+usermodel
+fullName - String
+email    - Stting
+password - String
+cart     - Array
+isAdmin  - Boolean
+order    - Array
+contact  - number
+picture  - String db
+
+
+product
+image 
+name 
+price 
+discount 
+bg-color
+panel-color
+text-color
+
+
