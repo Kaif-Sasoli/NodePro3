@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheeji Shop</title>
+    <link rel="icon" type="image/jpg" href="/images/favicon.jpg">
+    <link rel="stylesheet" href="/public/stylesheets/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+      /* Active Class */
+        .active {
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+            background-color: white;
+            color: black;
+        }
+       @media only screen and (min-width: 430px) {
+        .cart {
+            height: 300px !important;
+        }
+      }
+    </style>
+
+</head>
+<body>
+          <div class="success w-[70%] md:w-[30%] py-3 md:py-5 top-5 md:top-8 left-1/2 fixed -translate-x-1/2 -translate-y-1/2  md:text-2xl font-semibold text-center bg-red-300 z-50 rounded-bl-md rounded-br-md hidden">
+            <h1></h1>
+          </div>
+          
+          <!-- Header -->
+          <%- include('partials/header')-%>
+          
+          <!-- Sidebar -->
+          <%- include('partials/sidebar') -%>
+          
+            <!-- Main-body -->
+            <div class="main-body w-full flex flex-wrap flex-col gap-10 px-8 py-10 mt-14  md:ml-16  md:w-[calc(100%-70px)] md:flex-row transition-all">
+                   
+              <% if(admin && admin.products && admin.products.length > 0){ %>
+
+               <% admin.products.forEach(function(product){ %>
+                <!-- Cart1 -->
+                 <div class="cart w-full h-56 md:w-[230px] bg-[<%= product.bgcolor %>] rounded-sm shadow-xl relative">
+                  <i data-productid="<%= product._id %>" class='delete-btn absolute px-1 right-2 top-1 text-xl text-red-500 bx bx-trash rounded-full active:bg-[<%= product.textcolor %>] transition-all' ></i>
+                    <img class="w-full h-[70%] px-5" src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" alt="Image">
+                    
+                    <!-- Sub Div -->
+                    <div class="w-full h-[30%] px-5 py-3 flex flex-col  justify-between bg-[<%= product.panelcolor %>] rounded-sm">
+                      
+                       <h1 class="text-xl font-medium text-[<%= product.textcolor %>]"><%= product.name %></h1>
+                      <div class="w-full flex justify-between text-[<%= product.textcolor %>]">
+                        <h1>PKR <%= product.price %></h1>
+                       <% if(product.discount > 0 ) { %>
+                        <h1  class="ml-1 px-2 bg-[<%= product.textcolor %>] text-[<%= product.panelcolor %>] rounded-full" ><%= product.discount %>%</h1>
+                       <% } %> 
+                       </div>
+                    </div>
+                 </div>
+                  <% }) %>
+                 <% } else { %>
+                    
+                   <div class="w-full h-[75vh] flex items-center justify-center text-2xl md:text-5xl font-medium md:font-bold text-slate-400"><h1 class="text-center">No Products have been created!</h1></div>
+
+                  <% } %>
+
+           
+            </div>
+          <!-- Attaching the JavaScript files -->
+          <script src="/javascripts/script.js"></script>
+          <script src="/javascripts/api.js" ></script>
+          <script>
+             
+    
+
+          </script>
+        
+</body>
+</html>

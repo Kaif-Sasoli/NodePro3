@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheeji Shop</title>
+    <link rel="icon" type="image/jpg" href="/images/favicon.jpg">
+    <link rel="stylesheet" href="/public/stylesheets/style.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>      
+          @media only screen and (min-width: 485px){
+             .form {
+                width: 80%;
+             }
+          }
+    </style>
+</head>
+<body>
+   
+          <!-- Main Div -->
+         <div class="main-div w-full h-screen px-8 sm:px-14 md:px-28 flex relative">
+
+            <div class="absolute top-5 left-2 sm:left-8 md:left-20 text-xl font-semibold z-10">
+                <h1>Cheeji</h1>
+            </div>
+            
+            <!-- Create -->
+             <div class="div1 w-full bg-slate-200  px-3 sm:px-14 flex flex-col justify-center  relative hidden  md:flex md:w-1/2 md:px-5">
+
+               <!-- ResponseDiv -->
+               <div class="responseDiv mb-3 text-xl w-[90%] absolute py-1 md:py-2 top-32 md:top-28 left-5 text-center bg-green-200 rounded-md transition-all hidden"><h1></h1></div>
+
+                <h1 class="text-3xl sm:text-4xl font-semibold md:text-3xl">welcome to <span class="text-blue-500">Shop</span></h1>
+                <h3 class="text-xl font-semibold mb-5">create your account</h3>
+                <form action="" method="post" class="form1 w-full flex justify-center items-center flex-col md:w-full md:items-start">
+                    <input class="w-full mb-3 h-9 rounded-sm pl-4 outline-none" type="text" placeholder="Full Name" name="fullName">
+                    <input class="w-full mb-3 h-9 rounded-sm pl-4 outline-none" type="email" placeholder="Email" name="email">
+                    <div class="w-full relative">
+                    <input id="password1" class="w-full mb-3 h-9 rounded-sm pl-4 outline-none" type="password" placeholder="password" name="password">
+                    <img id="eyeOpen1" class="w-8 h-8 right-2 md:right-2 top-1  absolute" src="/images/eye.png" alt="">
+                     <img id="eyeClose1" class="w-5 h-4 right-4 md:right-4 top-3 absolute hidden" src="/images/eye-close.png" alt="">
+                  </div>
+                    <input class="sub1 w-[180px] mb-3 h-9 rounded-full bg-blue-500 px-2 text-white hover:bg-blue-600 active:border-2 active:border-slate-300" type="submit" value="Create My Account">
+                </form>
+                <h2 class="mt-2 sm:pr-24 text-center md:hidden">--------- or ---------</h2>
+                <button id="signIn" class="text-blue-500 sm:pr-24 md:hidden">Sign In</button>
+             </div>
+
+
+             <!-- Div 2 -->
+              <div class="div2  bg-slate-200 w-full px-3 flex justify-center items-center sm:px-8 md:bg-transparent">
+            
+                <!-- Or Div -->
+                <div class="w-1/4 hidden md:flex justify-center "><div class="w-10 h-10 flex justify-center items-center bg-blue-500 rounded-full"><h1 class="text-white text-xl mb-1">or</h1></div></div>
+
+                <div class="form-div w-full flex flex-col items-center justify-center md:items-start md:pl-14 relative">
+                 
+                  <!-- ResponseDiv for form 2 -->
+               <div class="responseDiv2 mb-3 text-xl w-[90%] md:w-[70%] absolute py-1 md:py-2 -top-14 md:-top-14 left-[5%] md:left-[12%] text-center bg-red-200 rounded-md transition-all hidden"><h1></h1></div>
+               <h1 class="text-3xl sm:text-4xl font-semibold md:text-3xl mb-7 md:hidden">welcome to <span class="text-blue-500">Shop</span></h1>
+
+                    <h3 class="text-xl sm:text-3xl font-semibold mb-4 md:mb-4 md:text-2xl">Login your account</h3>
+                    <form action="" method="" class="form2 w-full flex flex-col items-center justify-center md:w-full md:items-start">
+                    <input class="w-full md:w-4/5 mb-3 h-9 outline-none rounded-sm px-3 md:bg-slate-100" type="text" placeholder="Email" name="email">
+                    <div class="relative w-full">
+                    <input id="password2" class="w-full md:w-4/5 mb-3 h-9 outline-none rounded-sm px-3 md:bg-slate-100" type="password" placeholder="Password" name="password">
+                     <img id="eyeOpen2" class="w-8 h-8 right-2 md:right-24 top-1  absolute" src="/images/eye.png" alt="">
+                     <img id="eyeClose2" class="w-5 h-4 right-4 md:right-[105px] top-3 absolute hidden" src="/images/eye-close.png" alt="">
+                  </div>
+                    <input class="w-52 bg-blue-500 text-white rounded-full py-1 px-4 md:w-20 hover:bg-blue-600 active:border-2 active:border-slate-300" type="submit" value="Login"> 
+                </form>
+                 <h2 class="mt-2 md:hidden">--------- or ---------</h2>
+                <button id="signUp" class="text-blue-500 md:hidden">Sign Up</button>
+                </div>
+              </div>
+
+         </div>
+         <!-- Main Div Ends -->
+
+         <!-- Attaching the JavaScript files -->
+         <script src="/javascripts/script.js"></script>
+         <script src="/javascripts/api.js"></script>
+</body>
+</html>

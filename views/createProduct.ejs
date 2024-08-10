@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheeji Shop</title>
+    <link rel="icon" type="image/jpg" href="/images/favicon.jpg">
+    <link rel="stylesheet" href="/public/stylesheets/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+        .active {
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+            background-color: white;
+            color: black;
+        }
+       @media only screen and (min-width: 430px) {
+        .cart {
+            height: 300px !important;
+        }
+       }
+    </style>
+</head>
+<body>
+          <!-- Header -->
+          <%- include('partials/header') -%>
+
+          <!-- Sidebar -->
+          <%- include('partials/sidebar') -%>
+
+            <!-- Main-body -->
+            <div class="main-body w-full flex flex-wrap flex-col gap-10 px-8 py-10 mt-14  md:ml-16  md:w-[calc(100%-70px)] md:flex-row transition-all">
+                               
+                <div class="w-full pb-5 border-b-[1px] border-slate-500">
+                    <h1 class="text-xl md:text-2xl font-medium">Create New Product</h1>
+                  </div>
+                  
+                  <div>
+                    <h3 class="text-xl">Product Details</h3>
+                  </div>
+
+                  <!-- Main for Two Parts -->
+                  <div class="w-full flex flex-col md:flex-row">
+
+                    <form action="/products/create" method="post" enctype="multipart/form-data" class="productForm w-full md:w-2/3">
+                    
+
+                    <!-- Div1 -->
+                     <div class="mb-3">
+                    <div class="w-full flex gap-4">
+                    <label class="" for="productImage">Product Image</label>
+                    <label for="productImage" class="mylabel block px-3 py-[2px] md:py-[2px]  rounded-full bg-blue-500 hover:bg-blue-600">Select File</label>
+                    <input id="productImage" class="hidden" type="file" name="productImage">
+                   </div>
+                   <h1 id="imgResponse" class=" text-red-500"></h1>
+                  </div>
+                    
+                   <!-- div2 Image -->
+                 <div class="w-full h-40 sm:h-60 mb-3  rounded-md md:hidden overflow-hidden shadow-md">
+                    <img id="proImg2" class="h-full w-full rounded-md" src="/images/defaultImage.png" alt="Default Image">
+                 </div>
+
+                 <!-- Input -->
+                 <input class="w-full sm:w-[90%] md:w-[70%] mb-2 md:mb-3 py-2 pl-2 bg-slate-100 rounded-sm" type="text" name="name" placeholder="Product Name">
+
+                 <!-- div3 -->
+                 <div class="flex mb-2 md:mb-3 gap-2">
+                    <input class="py-2 pl-2 w-1/3 md:w-[20%] bg-slate-100  rounded-sm tracking-tighter" type="number" name="price" placeholder="Product Price">
+                    <input class="py-2 pl-2 w-[37%] md:w-[22%] bg-slate-100  rounded-sm tracking-tighter" type="number" name="discount" placeholder="Discount Price">
+                  </div>
+    
+                <h1 class="mt-10 md:mt-14 mb-2 text-xl">Panel Details</h1>
+
+                <div class="w-full flex gap-2 mb-2 md:mb-3">
+                    <input class="py-2 pl-1 md:pl-2 w-[40%] md:w-[25%] bg-slate-100 tracking-tighter" type="text" name="bgcolor"  placeholder="Background Color">
+                    <input class="py-2 pl-1 md:pl-2 w-[30%] md:w-[17%] bg-slate-100 tracking-tighter" type="text" name="panelcolor" placeholder="Panel Color">
+                    <input class="py-2 pl-1  md:pl-2 w-[30%] md:w-[18%] bg-slate-100 tracking-tighter" type="text" name="panelcolor2" placeholder="Panel Color 2">
+                </div>
+
+                <div>
+                 <input class="py-2 pl-2 w-[72.3%] md:w-[43.5%] bg-slate-100" type="text" name="textcolor" placeholder="Text Color">
+                </div>
+                 <input type="submit" value="Create a product" class="px-2 py-1 w-[72.3%] md:w-[43.5%] mt-2 md:mt-3 bg-blue-500 rounded-full hover:bg-blue-600">
+                  
+                 <div class="responseDiv w-3/4 py-1 md:py-2 mt-3 rounded-lg text-center bg-green-200 hidden"><h1></h1></div>
+            </form>
+
+            <!-- Image Div for big Screens -->
+             <div class="hidden md:-mt-5 md:block md:w-2/3 md:pr-10 md:h-80 rounded-md overflow-hidden">
+                <img id="proImg" class="w-full h-full rounded-md shadow-xl" src="/images/defaultImage.png" alt="Default Image">
+             </div>
+             
+             </div>
+           </div>
+
+          <!-- Attaching the JavaScript files -->
+          <script src="/javascripts/script.js"></script>
+          <script src="/javascripts/api.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheeji Shop</title>
+    <link rel="icon" type="image/jpg" href="/images/favicon.jpg">
+    <link rel="stylesheet" href="/public/stylesheets/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    
+    <style>
+        .active {
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+            background-color: white;
+            color: black;
+        }
+       @media only screen and (min-width: 430px) {
+        .cart {
+            height: 300px !important;
+        }
+      }
+      
+        .circle {
+            stroke-dasharray: 220;
+            stroke-dashoffset: 220;
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: center;
+        }
+    
+    </style>
+
+</head>
+<body>
+          
+           <!-- Header -->
+          <%- include('partials/header')-%>
+
+          <!-- Sidebar -->
+          <%- include('partials/sidebar') -%>
+          
+            <!-- Main-body -->
+            <div class="main-body w-full flex flex-wrap flex-col gap-10 px-8 py-10 mt-14  md:ml-16  md:w-[calc(100%-70px)] md:flex-row transition-all">
+                   
+              <!-- Cards -->
+             <div class="cards py-5 flex flex-wrap gap-5 w-full transition-all"> 
+                     
+                <!-- Card 1 -->
+                <div class="card w-full  md:w-60 px-5 py-4 flex justify-between items-center bg-slate-100 rounded-md shadow-lg hover:bg-slate-200 transition-all">
+                  <div>
+                    <h1 class="text-4xl font-bold text-slate-400"><%= totalUsers %></h1>
+                    <p class="pt-2 text-2xl">Customers</p>
+                  </div>
+                  <i class="text-5xl font-semibold las la-users"></i>
+                </div>
+
+                 <!-- Card 2 -->
+                 <div class="card w-full  md:w-60 px-5 py-4 flex justify-between items-center bg-slate-100 rounded-md shadow-lg hover:bg-slate-200 transition-all">
+                    <div>
+                      <h1 id="productCount" class="text-4xl font-bold text-slate-400"><%= admin.productCount  %></h1>
+                      <p class="pt-2 text-2xl">Products</p>
+                    </div>
+                    <i class="text-5xl font-semibold las la-boxes"></i>
+                  </div>
+
+                   <!-- Card 3 -->
+                <div class="card w-full  md:w-60 px-5 py-4 flex justify-between items-center bg-slate-100 rounded-md shadow-lg hover:bg-slate-200 transition-all">
+                    <div>
+                      <h1 id="totalOrders" class="text-4xl font-bold text-slate-400"><%= totalOrders %></h1>
+                      <p class="pt-2 text-2xl">Orders</p>
+                    </div>
+                    <i class="text-5xl font-semibold las la-shopping-bag"></i>
+                  </div>
+
+                   <!-- Card 4 -->
+                <div class="card w-full  md:w-60 px-5 py-4 flex justify-between items-center bg-slate-100 rounded-md shadow-lg hover:bg-slate-200 transition-all">
+                    <div>
+                      <h1 class="text-4xl font-bold text-slate-400">67</h1>
+                      <p class="pt-2 text-2xl">Tasks</p>
+                    </div>
+                    <i class="text-5xl font-semibold las la-tasks"></i>
+                  </div>
+
+             </div>   
+
+             <!-- Table Div -->
+             <div class="w-full flex flex-col md:flex-row gap-10">
+                 
+                <!-- div1 -->
+                <div class="w-full md:w-2/3 py-5 bg-slate-100 shadow-xl rounded-lg overflow-hidden">
+
+                    <div class="flex justify-between px-5">
+                        <p class="text-xl font-medium">Orders</p>
+                        <button id="seeAllTable" class="px-3 py-1 bg-slate-400 rounded-md outline-none border-zinc-600 active:border-2 transition-all">See All</button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+
+                    <!-- Table -->
+                   <table class="dashboardTable w-full table-fixed mt-2">
+                    <tr class="text-center border-b-[1px] border-black">
+                        <th class="py-2">Product</th>
+                        <th class="py-2">Customer</th>
+                        <th class="py-2">Status</th>
+                        <th class="py-2">Amount</th>
+                    </tr>
+                    <% users.forEach(function(user) { %>
+                      <% if (user.order.length > 0) { %>
+                          <% user.order.forEach(function(order, index) { %> <!-- Loop through each order of the user -->
+                              <tr class="text-center border-b-[1px] border-black">
+                                  <td class="py-2"><%= order.productName.join(', ') %> </td> <!-- Product Names -->
+                                  <td class="py-2"><%= user.fullName %></td> <!-- User's Full Name -->
+                                  <td class="py-2"><button class="bg-green-400 px-2 rounded-2xl">Pending</button></td> <!-- Order Status -->
+                                  <td class="py-2"><%= order.totalMRP %></td> <!-- Net Total for the order -->
+                              </tr>
+                          <% }) %>
+                      <% } %>
+                  <% }) %>
+                  
+                  <% if (users.every(user => user.order.length === 0)) { %> <!-- Check if all users have no orders -->
+                      <!-- this row that covers all the table width and the th should be in center -->
+                      <tr>
+                          <th class="py-12 text-center text-xl" colspan="4">No Order has been Placed</th>
+                      </tr> 
+                  <% } %>
+                   </table>
+                </div>
+
+                </div>
+
+                <div class="w-full md:w-1/4 flex flex-col items-center justify-center h-60 bg-gray-100 rounded-lg shadow-xl">
+                  <div class="w-full px-5 py-2 flex justify-between">
+                      <p class="font-medium">Total Sale</p>
+                      <button class="px-2 py-1 bg-slate-400 rounded-md">See All</button>
+                  </div>
+          
+                  <div class="relative flex items-center justify-center w-52 h-52">
+                      <svg class="absolute w-full h-full transform" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="35" stroke="currentColor" stroke-width="7" fill="none" class="text-gray-200"></circle>
+                          <circle cx="50" cy="50" r="35" stroke="currentColor" stroke-width="7" fill="none" class="circle text-blue-500"></circle>
+                      </svg>
+                      <span class="absolute text-xl font-semibold text-blue-500" id="progress-text">0%</span>
+                  </div>
+              </div>
+
+             </div>
+                 
+            </div>
+            <!-- Attaching the JavaScript files -->
+          <script src="/javascripts/script.js"></script>
+</body>
+</html>

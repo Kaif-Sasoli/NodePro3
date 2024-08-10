@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheeji Shop</title>
+    <link rel="icon" type="image/jpg" href="/images/favicon.jpg">
+    <link rel="stylesheet" href="/public/stylesheets/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    
+    <style>
+        .active {
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+            background-color: white;
+            color: black;
+        }
+
+    
+    </style>
+
+</head>
+<body>
+          <!-- Header  -->
+          <%- include('partials/header')-%>
+
+          <!-- Sidebar  -->
+          <%- include('partials/sidebar') -%>
+          
+  
+            <!-- Main-body -->
+            <div class="main-body mt-20 px-5 md:px-20 w-full flex items-start flex-col gap-5 transition-all">
+                
+               <h1 class="w-full text-3xl font-medium text-center md:text-left">Edit Profile</h1>
+
+               <form action="/update" method="post" enctype="multipart/form-data" class="w-full md:w-1/3">
+
+                <!-- Div 1 -->
+                <div class="mb-2">
+                    <div class="w-full flex items-center gap-4">
+                     <% if(user){ %>
+                    <img id="userImg" class="w-14 h-14 rounded-lg border-2 border-slate-400" src="data:image/jpeg;base64,<%= user.picture.toString('base64') %>" alt="">
+                     <% } else if(owner) { %>
+                      <img id="userImg" class="w-14 h-14 rounded-lg border-2 border-slate-400" src="data:image/jpeg;base64,<%= owner.picture.toString('base64') %>" alt="">
+                      <% } %>
+                    <label class="" for="productImage">Profile Image</label>
+                    <label for="userImage" class="mylabel block px-3 py-[2px] md:py-[2px]  rounded-full bg-blue-500 hover:bg-blue-600 active:border-2 active:border-zinc-600">Select File</label>
+                    <input id="userImage" class="hidden" type="file" name="picture">
+                   </div>
+                   <div id="userImgResponse" class="flashMessage  text-red-500"><%= messages.imgError %></div>
+                </div>
+                <!-- Div 2 -->
+                 <div class="flex flex-col">
+                    <label for="name">Full Name</label>
+                    <input type="text" value="<%= user ? user.fullName : owner.fullName %>" name="fullName" class="py-1 bg-slate-100 p-2 rounded-md outline-none hover:bg-slate-200">
+                 </div>
+                  <!-- Div 3 -->
+                  <div class="flex flex-col py-2">
+                    <label for="name">Current Password</label>
+                    <input type="text" class="py-1 bg-slate-100 p-2 rounded-md outline-none hover:bg-slate-200" name="currentPassword">
+                    <div class="flashMessage text-red-500"><%= messages.passwordError %></div>
+                 </div>
+
+                 <!-- Div 4 -->
+                 <div class="flex flex-col">
+                    <label for="name">New Password</label>
+                    <input type="text" class="py-1 bg-slate-100 p-2 rounded-md outline-none hover:bg-slate-200" name="newPassword">
+                 </div>
+                 <h1 class="py-2 font-medium text-xl">Further Information</h1>
+                 <!-- Div 5 -->
+                 <div class="flex flex-col mb-2">
+                    <label for="name">Address</label>
+                    <input type="text" class="py-1 bg-slate-100 p-2 rounded-md outline-none hover:bg-slate-200" name="address">
+                 </div>
+                  <!-- Div 6 -->
+                  <div class="flex flex-col mb-2">
+                    <label for="name">Contact Number</label>
+                    <input type="number" class="py-1 bg-slate-100 p-2 rounded-md outline-none" name="contact">
+                 </div>
+                 <input type="hidden" value="<%= user ? user.email : owner.email %>" name="email">
+                 <input type="submit" value="Update" class="update px-4 py-1 bg-blue-500 text-white rounded-xl active:border-2 border-b-gray-500 transition-all">
+               </form>               
+            </div>
+            
+            <!-- Attaching the JavaScript files -->
+          <script src="/javascripts/script.js"></script>
+        
+           
+        
+</body>
+</html>

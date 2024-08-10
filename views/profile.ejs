@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cjeeji Shop</title>
+    <link rel="icon" type="image/jpg" href="/images/favicon.jpg">
+    <link rel="stylesheet" href="/public/stylesheets/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    
+    <style>
+        .active {
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+            background-color: white;
+            color: black;
+        }
+    </style>
+
+</head>
+<body>
+          
+          <!-- Header -->
+          <%- include('partials/header')-%>
+
+          <!-- Sidebar -->
+          <%- include('partials/sidebar') -%>
+          
+  
+            <!-- Main-body -->
+            <div class="main-body w-full flex items-center flex-col gap-10 transition-all">
+                
+             <div class="w-full h-80 bg-[url('/images/BackgroundPink.jpg')] bg-cover bg-center"></div>      
+               
+              <div class="w-[90%] md:w-4/6 -mt-36 md:mb-5 bg-white rounded-2xl shadow-xl">
+                
+                <!-- Div1 -->
+                 <div class="px-5 md:px-14 py-5 md:py-10 text-xl md:text-3xl flex items-center justify-between relative text-pink-500">
+                    <i class='bx bxs-user'></i>
+                    <div class="w-20 h-20 md:w-32 md:h-32 absolute left-36 md:left-[43%] -top-8 rounded-full bg-white shadow-xl">
+                       <!-- Conditional rendering for user or owner picture -->
+                      <% if(user){ %>
+                      <img class="w-full h-full rounded-full" src="data:image/jpeg;base64,<%= user.picture.toString('base64') %>" alt="Image">
+                      <% } else if(owner) { %>
+                      <img class="w-full h-full rounded-full" src="data:image/jpeg;base64,<%= owner.picture.toString('base64') %>" alt="Image">
+                        <% } %>
+                    </div>
+                    <i class='bx bxs-shopping-bag'></i>
+                 </div>
+                    <!-- Conditional rendering for user or owner  -->
+                    
+                  <h1 class="mt-5 text-3xl md:text-5xl font-semibold tracking-widest text-center"><%= user ? user.fullName : owner.fullName %></h1>
+                  <p class="mt-1 md:mt-2 text-center text-xs md:text-sm"><%= user ? user.email : owner.email %></p>
+                  <p class="text-center text-xs md:text-sm"><%= user ? user.contact : owner.contact %></p>
+
+                  <div class="mt-10 md:mt-5 md:text-xl flex flex-col items-center">
+                    <h3 class="text-2xl font-medium mb-1">Address</h3>
+                    <% if(user && user.address) { %>
+                      <h3><%= user.address %></h3>
+                  <% } else if (owner && owner.address) { %>
+                      <h3><%= owner.address %></h3>
+                  <% } else { %>
+                      <h3 class="text-xs">Not Mentioned</h3>
+                  <% } %>
+                  </div>
+                  
+                  <div class="my-10 md:text-xl w-full flex justify-center items-center gap-5 text-center">
+
+                    <div>
+                      <h1><%= user ? user.order.length : owner.products.length %></h1>
+                      <h3><%= user ? 'Orders' : 'Products' %></h3>
+                    </div>
+
+                    <!-- Not set -->
+                    <div>
+                        <h1>32</h1>
+                        <h3>Customer</h3>
+                    </div>
+                    <div>
+                        <h1>21</h1>
+                        <h3>Name</h3>
+                    </div>
+
+                  </div>
+
+                  <div class="text-center my-7 ">
+                    <a href="/edit" class="px-4 py-2 bg-pink-500 rounded-full transition-all hover:bg-pink-600 active:bg-pink-600 active:border-2 active:border-zinc-600">Edit Profile</a>
+                </div>
+              </div> 
+            </div>
+
+          <script src="/javascripts/script.js"></script>
+        
+           
+        
+</body>
+</html>
