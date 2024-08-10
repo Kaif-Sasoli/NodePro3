@@ -11,6 +11,7 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 const multer = require('multer');  
 const { Owner } = require('./models/userModel');
+const PORT = process.env.PORT || 4005;
 
 
 //Routes
@@ -48,7 +49,13 @@ app.use('/products', productsRouter); // Products Route
 
 
 // Listeninig 
-app.listen(process.env.PORT, (req, res) => {
-     console.log(`The Server is Listening on Port ${process.env.PORT}` ); 
+app.listen(PORT, (req, res) => {
+     try{
+      console.log("SERVER is listening on port");
+     }
+      catch(err){
+         res.status(500).send('Server Error: ');
+      }
+
 });
      
