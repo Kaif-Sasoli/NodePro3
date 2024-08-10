@@ -2,8 +2,9 @@
         
 const mongoose = require('mongoose');
 const dbgr = require('debug')('development:mongoose'); // Debugger
+require('dotenv').config();
 
-mongoose.connect('mongodb://127.0.0.1:27017/scatch')
+mongoose.connect(process.env.DB_CONNECTION)
 .then(function(){
    dbgr("Connection established");
 })

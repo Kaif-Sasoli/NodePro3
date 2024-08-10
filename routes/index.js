@@ -195,7 +195,7 @@ router.get('/edit', isLoggedIn, async function(req, res) {
         if(req.file){
 
             // Validate the file
-            let validationResult = validateImage(req.file.buffer);
+            let validationResult = validateImage(req.file);
             if(!validationResult.ok){
                 req.flash('imageError', "Only PNG, JPEG, and JPG files are allowed (1MB).")
                 return res.redirect('/edit');
